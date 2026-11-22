@@ -4,15 +4,15 @@
 
 Hazırlayan ve yayımlayan: **Murat AKTAŞ (Mur-47)**. İlk taslak ve düzenleme OpenAI Codex ve alt ajanlarının desteğiyle oluşturuldu. Bu çalışma insan incelemesine ve topluluk düzeltmesine açıktır; bütün kod bloklarının bütün ortamlarda doğrulandığı iddia edilmez. Çalıştırılan kontroller ve sınırlar deponun VALIDATION.md dosyasında açıklanır.
 
-Metin ve PDF CC BY 4.0, özgün kod örnekleri ve betikler MIT lisansındadır. Atıf vererek paylaşabilir ve uyarlayabilirsiniz. Üçüncü taraf belgeleri ve fontları kendi koşullarına tabidir. Yayın: https://github.com/Mur-47/full-stack-calisma-rehberi . Metin lisansı: https://creativecommons.org/licenses/by/4.0/ .
+Metin ve PDF CC BY 4.0, özgün kod örnekleri ve betikler MIT lisansındadır. Atıf vererek paylaşabilir ve uyarlayabilirsin. Üçüncü taraf belgeleri ve fontları kendi koşullarına tabidir. Yayın: https://github.com/Mur-47/full-stack-calisma-rehberi . Metin lisansı: https://creativecommons.org/licenses/by/4.0/ .
 
-Bu açık çalışma kitabı, web geliştirmeye temelden başlamak isteyenler için hazırlandı. Hedefi, kullanılan araçların adını ezberlemek değil; bir web uygulamasının isteği nasıl aldığını, veriyi nasıl sakladığını ve sonucu nasıl gösterdiğini anlayarak küçük bir özelliği kendi eliyle geliştirebilmektir. Örneklerin çoğu bakım ve iş takibi çevresindedir. Gerçek bir üretim projesindeki müşteriler, hesaplar ve veritabanı bu çalışmaların parçası değildir.
+Bu açık çalışma kitabı, web geliştirmeye temelden başlamak isteyenler için hazırlandı. Hedefi, kullanılan araçların adını ezberlemek değil; bir web uygulamasının isteği nasıl aldığını, veriyi nasıl sakladığını ve sonucu nasıl gösterdiğini anlayarak küçük bir özelliği kendi eliyle geliştirebilmektir. Örneklerin çoğu bakım ve iş takibi çevresindedir. Bütün alıştırmalar uydurma hesaplar ve ayrı öğrenme veritabanları kullanır.
 
 Bir kitabın bitmesi otomatik olarak bir meslek seviyesi kazandırmaz. Orta seviye geliştiricilik, bir problemi parçalara ayırmak, uygun çözümü seçmek, başkasının kodunu okuyabilmek, hata bulmak, test yazmak ve yaptığı değişikliğin sonucunu açıklamakla kazanılır. Bu kitap o beceriler için çalışma zemini verir. Sayfa çevirmek yerine kod yazarsan, her bölümdeki bozuk örnekleri gerçekten teşhis edersen ve bitirme projesini yardımsız kurarsan ölçülebilir bir gelişim elde edersin. Süre kişiye göre değişir; son bölümde 24 haftalık bir çalışma önerisi bulunur.
 
 ## Sıfırdan başlamak utanılacak bir şey değil
 
-Bir komutu bilmemek sorun değildir. Ne yaptığını bilmediğin komutu gerçek müşterinin verisinde çalıştırmak sorundur. Bir hata mesajını anlamamak da normaldir. Onu okumadan rastgele ayar değiştirip hangi değişikliğin sonucu etkilediğini kaybetmek ilerlemeyi zorlaştırır. Çalışma sırasında her seferinde üç cümle yaz: Ne bekliyordum? Ne oldu? Bunu hangi küçük deneyle ayırabilirim? Bu alışkanlık, yüz tane araç adına hakim olmaktan daha değerlidir.
+Yeni bir komutla karşılaşmak öğrenmenin doğal parçasıdır. Ne yaptığını bilmediğin komutu gerçek müşterinin verisinde çalıştırmak sorundur. Bir hata mesajını anlamamak da normaldir. Onu okumadan rastgele ayar değiştirip hangi değişikliğin sonucu etkilediğini kaybetmek ilerlemeyi zorlaştırır. Çalışma sırasında her seferinde üç cümle yaz: Ne bekliyordum? Ne oldu? Bunu hangi küçük deneyle ayırabilirim? Bu alışkanlık, yüz tane araç adına hakim olmaktan daha değerlidir.
 
 Kitap basit dil kullanır; teknik terimleri saklamaz. Önce günlük hayattan bir örnek, sonra gerçek tanım, sonra kod veya komut gelir. Benzetme yalnız ilk kapıdır. Örneğin sunucuyu garsona benzetmek isteğin taşınmasını açıklar ama yetkilendirmeyi, ağ gecikmesini veya aynı anda iki isteğin yarışmasını tek başına açıklamaz. Benzetmeyi anladıktan sonra terimin teknik anlamını öğrenmelisin.
 
@@ -71,7 +71,7 @@ Set-Location $studyRoot
 Get-Location
 ```
 
-Son komutta gerçekten eğitim klasöründe olduğunu gör. Gerçek uygulamanın `data`, `private`, `backups`, `logs`, yayın klasörleri, kullanıcı hesapları ve canlı portları çalışma malzemesi değildir. Kitapta geçen ad, e-posta, müşteri ve işler hayalidir. Bir öğrenme projesi oluşturmak için üretim veritabanının kopyasını alma. On tane uydurma satır çoğu kavramı öğrenmeye yeter.
+Son komutta gerçekten eğitim klasöründe olduğunu gör. Üretim klasörlerine ve canlı portlara erişmeden bu ayrı alanda çalış. Kitapta geçen ad, e-posta, müşteri ve işler hayalidir. Bir öğrenme projesi oluşturmak için üretim veritabanının kopyasını alma. On tane uydurma satır çoğu kavramı öğrenmeye yeter.
 
 Bir komutun başında `PS>` veya `$` görürsen bu terminal istemi olabilir; dosyanın parçası değildir. Bu kitap kod bloklarında mümkün olduğunca istemi yazmaz. `#` PowerShell'de yorum başlatabilir; URL'de ise fragment anlamına gelebilir. Aynı işaretin bağlama göre farklı görevi olduğunu aklında tut. Terminal hatası ile JavaScript sözdizimi hatasını aynı yerde arama.
 
@@ -79,7 +79,7 @@ Bir komutun başında `PS>` veya `$` görürsen bu terminal istemi olabilir; dos
 
 Yazılım araçları değişir. Bu kitap 22 Kasım 2026 bağlamında hazırlanmıştır; örneklerin çoğu sürümden bağımsız temellere dayanır. Node.js bölümündeki örnekler modern Node, backend bölümü .NET 10 ve uyumlu EF Core sürümü çevresindedir. Kullanacağın sürümü önce `node --version`, `npm --version`, `dotnet --info`, `git --version` ve `docker version` ile öğren. Kitaptaki bir komut farklı sonuç verirse önce sürümü ve çalışma klasörünü kontrol et; rastgele paket güncelleme.
 
-Kurulum ekranındaki lisans ve yetki gereksinimlerini incele. Docker Desktop, Docker Engine, bir bulut sunucusu ve ücretli container registry aynı şey değildir. Bu kitabı çalışmak için ücretli sunucu veya yeni bir API anahtarı oluşturman gerekmiyor. Yerel örnekler yeterlidir. Kurumsal kullanım koşulları ve güncel sistem gereksinimleri için araçların kendi belgeleri esas alınır.
+Kurulum ekranındaki lisans ve yetki gereksinimlerini incele. Docker Desktop masaüstü uygulaması, Engine motor, registry ise imaj deposudur; bulut sunucusu bunları çalıştırabileceğin ayrı bir bilgisayardır. Bu kitabı çalışmak için ücretli sunucu veya yeni bir API anahtarı oluşturman gerekmiyor. Yerel örnekler yeterlidir. Kurumsal kullanım koşulları ve güncel sistem gereksinimleri için araçların kendi belgeleri esas alınır.
 
 ## Nasıl yardım isteyeceksin?
 
@@ -91,7 +91,7 @@ Bir kişiye veya yapay zekaya soru sorarken şu beş bilgiyi ver: amaç, en kü�
 
 Bir konuyu öğrendim demeden önce üç kanıt üret: çalışan küçük örnek, örneği bozan bir girdi ve o girdiyi yakalayan kontrol veya test. Git öğrendiğinde conflict çözümü; HTTP öğrendiğinde başarısız istek teşhisi; ORM öğrendiğinde üretilen sorguyu anlama; Docker öğrendiğinde container silinince verinin nerede kaldığını açıklama bu kanıtlara örnektir. Son bölümde bunları birleştiren bir kontrol listesi bulunur.
 
-Bu kitap bir sertifika sınavının cevabı değildir. Güçlü bir başlangıç, uygulama ve geri bildirim döngüsüdür. Zorlandığın bölüm, tekrar okuman gereken bir etiket değil; daha küçük bir deney kurman gerektiğini söyleyen işarettir.
+Bu kitap uygulama ve geri bildirimle ilerleyen bir çalışma rotasıdır. Güçlü bir başlangıç, uygulama ve geri bildirim döngüsüdür. Zorlandığın bölüm, tekrar okuman gereken bir etiket değil; daha küçük bir deney kurman gerektiğini söyleyen işarettir.
 
 ## Öğrenme yaklaşımı için kaynaklar
 

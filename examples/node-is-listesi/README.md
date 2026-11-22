@@ -9,7 +9,6 @@ npm start
 ```
 
 Adres: http://127.0.0.1:5310. Kapatmak için Ctrl+C.
-Sunucu kapalıyken `node verify.mjs` 6 birim testi ve 8 HTTP kontrolünü
-çalıştırır; yalnız kendi başlattığı süreci kapatır. Önce 5310'un boş
-olduğundan emin olun. Veriler bellektedir, oturum/yetki yoktur; gerçek veri
+Sunucu kapalıyken `node verify.mjs` 6 birim testi ve 10 HTTP kontrolünü
+çalıştırır; yalnız kendi başlattığı süreci kapatır. Test betiği kendi boş portunu seçer. Veriler bellektedir, oturum/yetki yoktur; gerçek veri
 kullanmayın ve internete açmayın. Lisans: [MIT](../../LICENSE-CODE).

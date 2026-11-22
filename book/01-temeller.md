@@ -6,7 +6,7 @@ Bir uygulamayı kullanmak ile uygulamanın nasıl çalıştığını anlamak far
 
 Bu metni okurken iki ayrı defter tut. İlkine yeni kelimeleri kendi cümlelerinle yaz. İkincisine deney kaydı yaz: ne yaptım, ne bekledim, ne gördüm, fark neden oluştu? Bir komutun çıktısını görmeden sonraki komuta geçme. Buradaki amaç yazılımcı gibi görünmek değil; bir iddiayı küçük bir deneyle doğrulayabilmektir.
 
-Uygulama örneğimiz hayali bir bakım takip sistemidir. Bir firma, bakım bekleyen asansörleri görür ve iş emri açar. Gerçek müşteri, şifre, sunucu veya veritabanı kullanmayacağız. Üretim uygulamalarının canlı klasörleri öğrenme tahtası değildir. Alıştırma için ayrı bir klasör açacaksın. Aynı cümleyi her bölümde tekrar etmeyeceğiz; bu sınır bütün kitap için geçerlidir.
+Uygulama örneğimiz hayali bir bakım takip sistemidir. Bir firma, bakım bekleyen cihazleri görür ve iş emri açar. Gerçek müşteri, şifre, sunucu veya veritabanı kullanmayacağız. Alıştırmaları ayrı bir çalışma klasöründe yapacağız. Alıştırma için ayrı bir klasör açacaksın. Aynı cümleyi her bölümde tekrar etmeyeceğiz; bu sınır bütün kitap için geçerlidir.
 
 ## Donanım, işletim sistemi ve program
 
@@ -14,13 +14,13 @@ Donanım elle tutulan parçadır: işlemci, bellek, disk, ağ kartı. İşletim 
 
 İşlemci komut yürütür. Bellek, çalışırken hızla erişilmesi gereken veriyi tutar. Disk kalıcı dosyaları tutar. Bu ayrım hata çözmede önemlidir. Bilgisayar kapanınca açık değişkenlerin kaybolması normaldir; diske yazılmış dosyanın kendiliğinden kaybolması başka bir sorundur. Bir sayfayı yenileyince listen siliniyorsa önce verinin yalnız tarayıcı belleğinde mi kaldığını düşün. Docker, veritabanı veya Git suçlamadan önce verinin nerede tutulduğunu bul.
 
-Bir programın diskte durması, çalıştığı anlamına gelmez. Masaüstünde Docker simgesi olması ile Docker motorunun çalışması aynı şey değildir. Benzer şekilde `app.js` dosyası olması, tarayıcının o dosyayı yüklediğini kanıtlamaz. Dosya bulunabilir, fakat HTML yanlış adrese bakıyor olabilir. Yazılımda sürekli şu ayrımı yap: mevcut mu, çalışıyor mu, doğru sürümü mü çalışıyor, beklenen ortamda mı çalışıyor?
+Dosya diskte saklanır; program başlatılınca bir süreç oluşur. Docker simgesi uygulamayı açar; motorun durumunu Docker Desktop içinde görebilirsin. Benzer şekilde `app.js` dosyasının yüklenmesini Network panelinde kontrol edebilirsin. Dosya bulunabilir, fakat HTML yanlış adrese bakıyor olabilir. Yazılımda sürekli şu ayrımı yap: mevcut mu, çalışıyor mu, doğru sürümü mü çalışıyor, beklenen ortamda mı çalışıyor?
 
 ## Süreç, iş parçacığı ve kimlik
 
 Bir program çalıştırıldığında işletim sistemi bir süreç oluşturur. Süreç, çalışan programın belleği, açık dosyaları ve diğer kaynaklarıyla birlikte yürüyen örneğidir. Her süreç bir PID ile tanınır. Aynı programdan iki tane açarsan genellikle iki süreç veya birden fazla yardımcı süreç oluşur. Tarayıcılar sekmeler ve güvenlik ayrımları nedeniyle birçok süreç kullanabilir.
 
-İş parçacığı, sürecin içindeki yürütme akışıdır. İlk aşamada ayrıntısını ezberleme. Şunu bilmen yeterli: süreç ile dosya aynı şey değildir; süreç ile pencere de aynı şey değildir. Pencere kapansa bile bazı programlar arka planda yaşamaya devam edebilir. Bir terminalde çalışan sunucuyu başka terminalden başlatınca port çakışmasının nedeni budur.
+İş parçacığı, sürecin içindeki yürütme akışıdır. İlk aşamada ayrıntısını ezberleme. Şunu bilmen yeterli: dosya, süreç ve pencere ayrı kavramlardır. Pencere kapansa bile bazı programlar arka planda yaşamaya devam edebilir. Bir terminalde çalışan sunucuyu başka terminalden başlatınca port çakışmasının nedeni budur.
 
 PowerShell'de yalnız okuma yapan bu komutları dene:
 
@@ -44,7 +44,7 @@ $env:LEARNING_MODE = 'practice'
 Write-Output $env:LEARNING_MODE
 ```
 
-Bu değişken, o oturumdan başlatılan süreçlere aktarılabilir. Bilgisayardaki bütün oturumlara kalıcı olarak yazılmaz. Ortam değişkeni gizli kasa değildir. Şifreleri komut geçmişine veya ekran görüntüsüne koyma. Buradaki `practice` bir ayardır; sır değildir.
+Bu değişken, o oturumdan başlatılan süreçlere aktarılabilir. Bilgisayardaki bütün oturumlara kalıcı olarak yazılmaz. Ortam değişkeni gizli kasa değildir. Şifreleri komut geçmişine veya ekran görüntüsüne koyma. Buradaki `practice` yalnız çalışma ortamını adlandıran bir ayardır.
 
 ## Çalışma dizini ve dosya yolu
 
@@ -75,13 +75,13 @@ Bu satır yalnız söz dizimi örneğidir. Kendi bilgisayarında böyle klasör 
 
 `index.html` dosyasının `.html` uzantısı, dosyanın HTML olarak ele alınacağını anlatır. Dosya adını değiştirmek içeriğini dönüştürmez. Bir resme `.txt` yazarsan resim metne dönüşmez. Windows uzantıları gizliyorsa `index.html.txt` oluşturabilirsin. Dosya Gezgini'nde dosya adı uzantılarını görünür yap.
 
-Kod dosyası çoğunlukla düz metindir. Word belgesi değildir. Türkçe karakterler için UTF-8 kullan. `ş` yerine garip simgeler çıkması çoğu zaman yanlış kodlama veya yanlış HTTP `charset` bilgisidir. Bir dosyanın karakterleri ile o karakterlerin diskteki baytları aynı kavram değildir. Özellikle şifre uzunluğu, dosya boyutu ve HTTP veri uzunluğu konuşurken bu ayrım önem kazanır.
+Kod dosyasını düz metin düzenleyicisinde UTF-8 olarak kaydet. Türkçe karakterler için UTF-8 kullan. `ş` yerine garip simgeler çıkması çoğu zaman yanlış kodlama veya yanlış HTTP `charset` bilgisidir. Karakterler seçilen kodlamayla baytlara çevrilir. Özellikle şifre uzunluğu, dosya boyutu ve HTTP veri uzunluğu konuşurken bu ayrım önem kazanır.
 
 Dosyanın adı, konumu, uzantısı ve içeriğini ayrı ayrı doğrula. Örneğin `style.css` doğru klasörde olsa bile HTML içindeki `href="styles.css"` farklı dosya ister. Bir harf farkı yeterlidir. Windows'ta çalışan büyük/küçük harf hatası Linux'ta bozulabilir; dosya adlarını tutarlı yazmak bu nedenle de önemlidir.
 
 ## Bir hatayı ilk kez sınıflandırmak
 
-Her hata aynı katmanda değildir. Şu beş kutuyla başla:
+Hataları katmanlarına göre ayırabilirsin. Şu beş kutuyla başla:
 
 - Dosya/yol hatası: gerekli dosya bulunmuyor.
 - Sözdizimi hatası: dilin kurallarına aykırı kod var.
@@ -89,7 +89,7 @@ Her hata aynı katmanda değildir. Şu beş kutuyla başla:
 - Mantık hatası: program hata vermiyor ama yanlış sonuç üretiyor.
 - Ortam hatası: doğru kod, eksik araç veya yanlış ayar nedeniyle çalışmıyor.
 
-Örneğin `git is not recognized` yazıyorsa henüz branch çatışmasına bakma; Git komutu bulunamıyor. `Address already in use` yazıyorsa sunucu adresine başka süreç bağlanmış olabilir. Toplam 100 yerine 100100 oluyorsa sayı yerine metin birleştiriyor olabilirsin. Hatanın cümlesini bir cümleyle Türkçeye çevir. Sonra o cümleyi doğrulayacak en küçük kontrolü seç.
+Örneğin `git is not recogned` yazıyorsa henüz branch çatışmasına bakma; Git komutu bulunamıyor. `Address already in use` yazıyorsa sunucu adresine başka süreç bağlanmış olabilir. Toplam 100 yerine 100100 oluyorsa sayı yerine metin birleştiriyor olabilirsin. Hatanın cümlesini bir cümleyle Türkçeye çevir. Sonra o cümleyi doğrulayacak en küçük kontrolü seç.
 
 ## Alıştırma: dosyayı arayan dedektif
 
@@ -111,7 +111,7 @@ Bu zincirin herhangi bir halkası bozulabilir. İnternet çalışıyor olsa bile
 
 İstemci isteği başlatan taraftır. Tarayıcı çoğu web uygulamasında istemcidir. Sunucu ise isteği dinleyip yanıtlayan taraftır. Sunucu sözcüğü bazen fiziksel bilgisayarı, bazen o bilgisayardaki programı anlatır. Bu iki anlamı ayır. Tek bilgisayarda tarayıcı ve geliştirme sunucusu beraber çalışabilir. Fiziksel olarak aynı makinede olmaları, mantıksal rollerini birleştirmez.
 
-Ön yüz, kullanıcının etkileştiği arayüzdür. Arka uç, istekleri işler, yetkiyi kontrol eder ve iş kurallarını uygular. Veritabanı kalıcı veriyi yönetir. Full stack geliştirici bu parçalar arasında nasıl veri aktığını anlayabilir. Bu, bütün alanlarda aynı uzmanlığa sahip olmak veya her aracı ezberlemek değildir.
+Ön yüz, kullanıcının etkileştiği arayüzdür. Arka uç, istekleri işler, yetkiyi kontrol eder ve iş kurallarını uygular. Veritabanı kalıcı veriyi yönetir. Full stack geliştirici bu parçalar arasında nasıl veri aktığını anlayabilir. İlk hedefin bu parçalar arasındaki veri yolunu izleyebilmek olsun.
 
 Bakım sistemi örneğinde kullanıcı "İşi tamamla" düğmesine basar. Ön yüz istek gönderir. Arka uç bu kullanıcının bu işi tamamlamaya yetkili olup olmadığını kontrol eder. Veritabanı değişikliği kaydeder. Yanıt gelir ve ön yüz durumu yeniler. Düğmeyi gizlemek, sunucudaki yetki denetiminin yerine geçmez.
 
@@ -125,7 +125,7 @@ Bir alan adına `ping` yanıtı gelmemesi tek başına sitenin kapalı olduğunu
 
 ## Port ve protokol
 
-IP adresi apartmanın adresiyse port daire numarası gibi düşünülebilir. Aynı makinede birden fazla program farklı portlarda dinleyebilir. HTTP için 80, HTTPS için 443 yaygın varsayılanlardır. Geliştirmede 5500, 3000 veya 8080 gibi başka portlar kullanılır. Sayıların kendisi aracı belirlemez: 3000 portu yalnız Node.js'e ait değildir.
+IP adresi apartmanın adresiyse port daire numarası gibi düşünülebilir. Aynı makinede birden fazla program farklı portlarda dinleyebilir. HTTP için 80, HTTPS için 443 yaygın varsayılanlardır. Geliştirmede 5500, 3000 veya 8080 gibi başka portlar kullanılır. Sayıların kendisi aracı belirlemez: 3000 portunda uygun herhangi bir program dinleyebilir.
 
 URL'de protokol, hedef, port ve yol bulunabilir:
 
@@ -170,7 +170,7 @@ Content-Type: application/json; charset=utf-8
 
 `GET` genellikle veri okumak içindir. `POST` bir işlem veya yeni kaynak oluşturmak için kullanılabilir. `PUT` belirli kaynağın durumunu değiştirmek için kullanılır. `PATCH` kısmi değişiklik anlatabilir. `DELETE` silme isteğidir. İsimler tek başına güvenlik sağlamaz; sunucu her durumda girdiyi ve yetkiyi doğrulamalıdır. GET'in veri değiştirmesi, önbellek ve otomatik tekrar davranışları nedeniyle tehlikeli tasarım olabilir.
 
-Başlıklar ek bilgidir. `Content-Type`, gönderilen verinin türünü; `Accept`, istemcinin almak istediği türü bildirir. JSON metin biçimidir. JavaScript nesnesiyle aynı şey değildir; ağda gönderilirken belirli sözdizimine sahip karakterlerden oluşur. JSON'da anahtarlar çift tırnakla yazılır. JavaScript'te geçerli olan her ifade JSON değildir.
+Başlıklar ek bilgidir. `Content-Type`, gönderilen verinin türünü; `Accept`, istemcinin almak istediği türü bildirir. JSON metin biçimidir. JavaScript nesnesinden serileştirilerek üretilir; ağda gönderilirken belirli sözdizimine sahip karakterlerden oluşur. JSON'da anahtarlar çift tırnakla yazılır. JavaScript'te geçerli olan her ifade JSON değildir.
 
 ## Durum kodunu doğru yorumlamak
 
@@ -259,27 +259,27 @@ Diff, iki durumun farkıdır. `git diff` çalışma ağacı ile index arasındak
 Diff'te `+` eklenen, `-` kaldırılan satırı anlatır. Kırmızı satır her zaman kötü, yeşil satır her zaman iyi değildir. Bir yetki kontrolünün kaldırılması tek satırdır ama etkisi büyüktür. İnceleme yaparken satır sayısından önce davranışa bak: bu değişiklikten önce hangi girdi ne sonuç veriyordu, şimdi ne verecek?
 
 ```diff
-- const limit = 30;
-+ const limit = 180;
+- const limit = 14;
++ const limit = 90;
 ```
 
 Bu örneği gördüğünde "sayı değişmiş" demek yetmez. Limit gün mü, kayıt sayısı mı, para mı? İzin verilen maksimum mu, varsayılan mı? Sunucuda da aynı sınır var mı? Formdaki maksimumu artırıp sunucuyu değiştirmezsen kullanıcı yeni değeri seçebilir ama kaydedemez.
 
 ## Branch ile tek işe odaklanmak
 
-Yeni özelliği doğrudan main üzerinde geliştirmek yerine dal aç. Böylece değişikliği bağımsız inceleyebilirsin. Branch tam klasör kopyası değildir; Git geçmişindeki bir işaretçidir. Dal değiştirince Git çalışma ağacındaki dosyaları o dalın durumuna getirir. Kaydedilmemiş editör sekmesinin bu davranışla nasıl etkileştiğini ayrıca kontrol et.
+Yeni özelliği doğrudan main üzerinde geliştirmek yerine dal aç. Böylece değişikliği bağımsız inceleyebilirsin. Branch, Git geçmişindeki bir işaretçidir. Dal değiştirince Git çalışma ağacındaki dosyaları o dalın durumuna getirir. Kaydedilmemiş editör sekmesinin bu davranışla nasıl etkileştiğini ayrıca kontrol et.
 
 ```powershell
-git switch -c feat/pilot-note
-'Pilot suresi: 30 gun' | Add-Content README.md
+git switch -c feat/deneme-note
+'Deneme suresi: 30 gun' | Add-Content README.md
 git diff
 git add README.md
-git commit -m 'docs: pilot suresini acikla'
+git commit -m 'docs: deneme suresini acikla'
 git switch main
 Get-Content README.md
 ```
 
-Main'e dönünce pilot satırı görünmez; çünkü commit diğer daldadır. Bu kayıp değildir. `git switch feat/pilot-note` dediğinde satır geri gelir. Henüz commit etmediğin değişiklikler varsa dal geçişi her zaman istediğin gibi gerçekleşmeyebilir; Git bazı geçişleri durdurur. Bu durumda hata mesajını okuyup değişikliği commit etmek veya geçici saklamak arasında bilinçli karar ver.
+Main'e dönünce deneme satırı görünmez; çünkü commit diğer daldadır. Commit dalın geçmişinde durmaya devam eder. `git switch feat/deneme-note` dediğinde satır geri gelir. Henüz commit etmediğin değişiklikler varsa dal geçişi her zaman istediğin gibi gerçekleşmeyebilir; Git bazı geçişleri durdurur. Bu durumda hata mesajını okuyup değişikliği commit etmek veya geçici saklamak arasında bilinçli karar ver.
 
 ## Merge ile birleştirmek
 
@@ -287,13 +287,13 @@ Main'e dönünce pilot satırı görünmez; çünkü commit diğer daldadır. Bu
 
 ```powershell
 git status
-git merge feat/pilot-note
+git merge feat/deneme-note
 git log --oneline --graph --all
 ```
 
 Main başka yöne ilerlememişse fast-forward olabilir: işaretçi mevcut commit'e ilerler. İki dal da farklı commit'ler aldıysa merge commit'i gerekebilir. Komutun başarıyla bitmesi ürün testinin geçtiğini söylemez; yalnız Git'in metinsel geçmişi birleştirebildiğini söyler.
 
-Bir kod incelemesinde birleşebilir durumda olmak, doğru olmak değildir. İki dal farklı dosyaları değiştirse bile sözleşmeyi bozabilir. Biri API alanını `pilotDays` yerine `trialDays` yapar, diğeri eski adı kullanan formu ekler; Git çatışma göstermeden işlevsel hata oluşur.
+Bir kod incelemesinde birleşebilir durumda olmak, doğru olmak değildir. İki dal farklı dosyaları değiştirse bile sözleşmeyi bozabilir. Biri API alanını `denemeDays` yerine `trialDays` yapar, diğeri eski adı kullanan formu ekler; Git çatışma göstermeden işlevsel hata oluşur.
 
 ## Çatışmayı kendin üret ve çöz
 
@@ -329,7 +329,7 @@ git status
 
 ## Rebase neyi değiştirir?
 
-Merge iki geçmişi bir araya getirir. Rebase, dalındaki commit değişikliklerini başka bir tabanın üzerine yeniden uygular. Bu işlem commit kimliklerini değiştirebilir. Çizgi daha düz görünür, fakat geçmiş yeniden yazılır. Kendi henüz paylaşmadığın dalında yararlı olabilir; başka insanların dayandığı ortak geçmişte beklenmeyen sorun yaratabilir.
+Merge iki geçmişi bir araya getirir. Rebase, dalındaki commit değişikliklerini başka bir tabanın üzerine yeniden uygular. Bu işlem commit kimliklerini değiştirebilir. Çizgi daha düz görünür, fakat geçmiş yeniden yazılır. Kendi henüz paylaşmadığın dalında yararlı olabilir; başka insanların dayandığı ortak geçmişte beklenmeyen sor yaratabilir.
 
 Yeni başlayan için güvenli kural: takımın akışını bilmeden paylaşılan branch'i rebase etme ve force push yapma. Rebase sırasında conflict çözülür, dosya seçilir ve `git rebase --continue` denir. Vazgeçmek için devam eden işlemde `git rebase --abort` kullanılır. Rebase'in ne yaptığını öğrenmek, her yerde kullanmak zorunda olduğun anlamına gelmez.
 
@@ -339,13 +339,13 @@ Somut zihinsel model kur: main üzerinde A ve B commit'leri varken sen A'dan C o
 
 `git restore dosya` çalışma ağacındaki commit edilmemiş değişikliği seçilen kaynaktaki duruma döndürebilir. Bu, yazdığın kodu kaybettirebilir. `git restore --staged dosya` dosyayı staging alanından çıkarır; normal kullanımda çalışma dosyasını bırakır. `git revert <commit>` ters değişiklik yapan yeni commit oluşturur. Paylaşılmış hatalı değişiklikte çoğu zaman geçmişi yeniden yazmadan ilerlemeyi sağlar.
 
-`git reset --hard` ve `git clean -fd` gibi komutları sorun çözme düğmesi sayma. İlki takip edilen yerel değişiklikleri kaybettirebilir; ikincisi takip edilmeyen dosyaları silebilir. Bu kitap bunları uygulama alıştırması olarak kullandırmıyor. Gerçek projede önce status, diff, hedef yol, yedek ve takımın talimatı gerekir. Ne sileceğini bilmiyorsan çalıştırma.
+`git reset --hard` ve `git clean -fd` gibi komutları sor çözme düğmesi sayma. İlki takip edilen yerel değişiklikleri kaybettirebilir; ikincisi takip edilmeyen dosyaları silebilir. Bu kitap bunları uygulama alıştırması olarak kullandırmıyor. Gerçek projede önce status, diff, hedef yol, yedek ve takımın talimatı gerekir. Ne sileceğini bilmiyorsan çalıştırma.
 
 Bir commit'i yanlış dalda oluşturduysan hemen silme. Önce commit SHA'sını kaydet. `git branch rescue/my-work` gibi bir kurtarma dalı mevcut commit'i referans altında tutabilir. Ancak daha karmaşık geçmiş düzeltmelerini kendi çalışma akışını anlamadan kopyalama; zararı düzeltmek için yapılan ikinci acele komut ilkinden daha pahalı olabilir.
 
 ## GitHub ile uzak depoya bağlanmak
 
-Remote, uzak depo adresine verilen isimdir. `origin` yaygın isimdir, özel bir zorunluluk değildir. Clone, depoyu yerel bilgisayara alır. Fetch, uzak referansların son durumunu getirir; mevcut çalışma dalını kendiliğinden birleştirmez. Pull ise fetch ile ardından seçili entegrasyon davranışını bir araya getirir. Bu yüzden inceleme yaparken fetch sonrasında farkı okumak daha kontrollü olabilir.
+Remote, uzak depo adresine verilen isimdir. `origin` yaygın bir isimdir; başka bir isim de seçebilirsin. Clone, depoyu yerel bilgisayara alır. Fetch, uzak referansların son durumunu getirir; mevcut çalışma dalını kendiliğinden birleştirmez. Pull ise fetch ile ardından seçili entegrasyon davranışını bir araya getirir. Bu yüzden inceleme yaparken fetch sonrasında farkı okumak daha kontrollü olabilir.
 
 ```powershell
 git remote -v
@@ -356,7 +356,7 @@ git log --oneline --decorate -5
 
 Bu komutlar remote tanımlı bir depoda anlamlıdır. Laboratuvarında remote yoksa `origin` bulunamadı hatası beklenir. Her örneğin önkoşulunu oku. İnternette gördüğün gerçek repo adresini yanlışlıkla kendi projenin remote'u yapma. Public ve private ayrımı, secret yönetiminin yerini tutmaz; private depoya da şifre commit edilmez.
 
-Bir branch'i ilk kez kendi uzak depona gönderirken `git push -u origin feat/pilot-note` kullanılabilir. Bu, paylaşım adımıdır. Burada gerçek hesap veya depo oluşturmak zorunda değilsin; GitHub alıştırmasını kendi eğitim depon hazır olduğunda yap. Kimlik doğrulama yöntemleri ve kurum kuralları değişebilir; şifreni komuta yazmak yerine resmi akışı izlersin.
+Bir branch'i ilk kez kendi uzak depona gönderirken `git push -u origin feat/deneme-note` kullanılabilir. Bu, paylaşım adımıdır. Burada gerçek hesap veya depo oluşturmak zorunda değilsin; GitHub alıştırmasını kendi eğitim depon hazır olduğunda yap. Kimlik doğrulama yöntemleri ve kurum kuralları değişebilir; şifreni komuta yazmak yerine resmi akışı izlersin.
 
 ## Git alıştırma seti
 
@@ -372,11 +372,11 @@ Kaynaklar: [Git switch referansı](https://git-scm.com/docs/git-switch), [Git me
 
 ## Issue, pull request ve review
 
-Issue yapılacak işin veya sorunun kaydıdır. Pull request, bir daldaki değişikliğin başka bir dala alınması önerisidir. Review bu değişikliğin incelenmesidir. Üçü aynı şey değildir. Issue'da "mobil form taşıyor" yazması, çözümün doğru olduğunu söylemez. Pull request'in açılması teslimin incelemeye hazır olduğunu gösterebilir; onay veya canlı yayın değildir.
+Issue yapılacak işin veya sorunun kaydıdır. Pull request, bir daldaki değişikliğin başka bir dala alınması önerisidir. Review bu değişikliğin incelenmesidir. Issue sorunu, PR değişikliği, review ise değerlendirmeyi kaydeder. Issue'da "mobil form taşıyor" yazması, çözümün doğru olduğunu söylemez. Pull request'in açılması teslimin incelemeye hazır olduğunu gösterebilir; onay veya canlı yayın değildir.
 
 İyi bir issue, beklenti ve mevcut davranışı ayırır. "Sistem berbat" yerine şunu yaz: "390 px genişlikte yeni firma formundaki Kaydet düğmesi yatay taşmayla ekran dışında kalıyor. Beklenti: yatay kaydırma olmadan görünmesi. Tekrarlama: Firmalar > Yeni firma > formu aç." Görüntü yararlıdır; fakat metinle tekrarlanabilir adım da gerekir. Görüntüdeki gerçek kişisel veriyi kapat.
 
-İyi pull request, neden değiştiğini ve değişikliğin ne yaptığını açıklar. "Düzenleme" başlığı yerine "Mobil firma formunun yatay taşmasını düzelt" yaz. Testleri ayır: "çalıştırıldı ve geçti", "çalıştırıldı ve kaldı", "çalıştırılmadı". Çalıştırmadığın şeyi tahminle yeşil gösterme. Bir testi atlamak bazen makuldür; gizlemek değildir.
+İyi pull request, neden değiştiğini ve değişikliğin ne yaptığını açıklar. "Düzenleme" başlığı yerine "Mobil firma formunun yatay taşmasını düzelt" yaz. Testleri ayır: "çalıştırıldı ve geçti", "çalıştırıldı ve kaldı", "çalıştırılmadı". Çalıştırmadığın şeyi tahminle yeşil gösterme. Atladığın testin gerekçesini de yaz.
 
 ## Küçük bir PR açıklaması yazmak
 
@@ -401,7 +401,7 @@ Bu metin kısa ama değerlendirilebilir. "Her şey test edildi" cümlesinden dah
 
 ## Base, head ve SHA
 
-PR'ın base dalı değişikliğin alınacağı hedef, head dalı değişikliğin geldiği daldır. SHA, belirli commit'in kimliğidir. Branch adı hareket eder; yeni commit geldikçe aynı branch başka commit'i gösterebilir. Bu nedenle dün incelediğin `feat/pilot-note` ile bugünkü aynı isim aynı içerik olmayabilir.
+PR'ın base dalı değişikliğin alınacağı hedef, head dalı değişikliğin geldiği daldır. SHA, belirli commit'in kimliğidir. Branch adı hareket eder; yeni commit geldikçe aynı branch başka commit'i gösterebilir. Bu nedenle dün incelediğin `feat/deneme-note` ile bugünkü aynı isim aynı içerik olmayabilir.
 
 Bir incelemede `head 51cc6e9 üzerinde` demek kanıtı bir duruma bağlar. Kısa SHA örnek için yeterli olabilir; otomasyon ve kayıt sisteminde tam kimlik daha nettir. Test raporunu başka commit'e aitmiş gibi gösterme. Yeni commit yalnız doküman değiştiriyorsa eski test kanıtının neden yeniden kullanılabildiğini açıklayabilirsin; yeni kod çalıştırılmış gibi konuşamazsın.
 
@@ -411,13 +411,13 @@ Git'te `A..B` ve `A...B` yazımlarının anlamları komuta göre bağlam gerekti
 
 Önce amaç ve kapsamı oku. Sonra değişen dosyaları gözden geçir. Ardından kullanıcıdan sunucuya giden veri yolunu izle. Şu sorular başlangıç için yeterlidir: Girdi nereden geliyor? Kim bu işlemi yapabilir? Hangi veri değişiyor? Başarısız olursa kullanıcı ne görür? Aynı işlem iki kez gelirse ne olur? Başka firmanın kimliği yazılırsa ne olur?
 
-Her incelemede bütün projeyi baştan okumak verimli değildir. Değişikliği anlamaya yetecek mevcut bağlamı oku. Örneğin bir form alanı eklendiyse alanın veri dönüştürmesini ve sunucu doğrulamasını incelemek gerekir. Bu, bütün finans modülünü yeniden denetlemek anlamına gelmez. Odak dar olmalı; varsayım kör olmamalı.
+İncelemeyi değişen davranış ve gerekli bağlamıyla sınırla. Değişikliği anlamaya yetecek mevcut bağlamı oku. Örneğin bir form alanı eklendiyse alanın veri dönüştürmesini ve sunucu doğrulamasını incelemek gerekir. İlgili veri akışını takip etmen yeterlidir. Odak dar olmalı; varsayım kör olmamalı.
 
 Görünen davranış ile sunucudaki davranışı karşılaştır. "En az 10 karakter" diyen ön yüzün başka karakter sayımı kullanması, tüm işaretler yeşilken sunucunun reddetmesine neden olabilir. UI testi yalnız işaretlerin yeşil olduğunu kontrol ediyorsa hatayı başarı sayabilir. Testin neyi ölçtüğünü düşünmek, test sayısını artırmaktan daha değerlidir.
 
 ## Bulgu nasıl yazılır?
 
-Bulgu en az dört parça taşımalıdır: sorun, yer, tekrarlama ve etki. Örneğin "P2: Aynı istek iki kez gönderilince iki ödeme kaydı oluşuyor. Yer: PaymentEndpoints.cs ilgili endpoint. Tekrarlama: aynı requestId ile iki POST gönder. Beklenen: tek kayıt. Gerçekleşen: bakiye iki kez artıyor." Düzeltme önerisi ekleyebilirsin; kanıt yerine öneri yazamazsın.
+Bulgu en az dört parça taşımalıdır: sor, yer, tekrarlama ve etki. Örneğin "P2: Aynı istek iki kez gönderilince iki ödeme kaydı oluşuyor. Yer: PaymentEndpoints.cs ilgili endpoint. Tekrarlama: aynı requestId ile iki POST gönder. Beklenen: tek kayıt. Gerçekleşen: bakiye iki kez artıyor." Düzeltme önerisi ekleyebilirsin; kanıt yerine öneri yazamazsın.
 
 Öncelik isimleri takım bazında değişebilir. Yaygın bir çalışma modeli olarak P1 ağır üretim/güvenlik/veri kaybı, P2 önemli işlev veya doğruluk sorunu, P3 sınırlı kullanım/görünüm sorunu olabilir. Bu sınıflandırmayı bağlama göre açıkla. Küçük görünen tek satır yetki hatası P1 olabilir; büyük CSS değişikliği yalnız P3 olabilir. Dosya sayısına bakarak risk ölçülmez.
 
@@ -425,7 +425,7 @@ Review yorumunda kişiyi değil değişikliği tartış. "Bunu yazan bilmiyor" �
 
 ## Alıştırma: kötü açıklamayı düzelt
 
-Şu açıklamayı incelemeye uygun hale getir: "Bir sürü hata düzeldi. Testler tamam. Artık iyi." Hayali değişiklik: pilot süresi alanı eklendi, varsayılan 30, 0 pilotsuz, 180 üst sınır. İki UI testi çalıştırıldı, backend çalıştırılmadı. Açıklaman üç cümle de olabilir; ancak çalıştırılmayan backend'i saklamamalıdır.
+Şu açıklamayı incelemeye uygun hale getir: "Bir sürü hata düzeldi. Testler tamam. Artık iyi." Hayali değişiklik: deneme süresi alanı eklendi, varsayılan 30, 0 denemesuz, 180 üst sınır. İki UI testi çalıştırıldı, backend çalıştırılmadı. Açıklaman üç cümle de olabilir; ancak çalıştırılmayan backend'i saklamamalıdır.
 
 Kaynak: [GitHub Docs: Önerilen değişiklikleri incelemek](https://docs.github.com/en/pull-requests/how-tos/review-pull-requests/reviewing-proposed-changes-in-a-pull-request). Buradaki PR ve bulgu metinleri bu kitap için yazılmış örneklerdir.
 
@@ -433,7 +433,7 @@ Kaynak: [GitHub Docs: Önerilen değişiklikleri incelemek](https://docs.github.
 
 ## HTML programlama dili midir?
 
-HTML bir işaretleme dilidir. İçeriğin anlamını ve yapısını tanımlar. Bir başlık, paragraf, liste, bağlantı, düğme ve form alanı aynı şey değildir. HTML tek başına "bu işi tamamla ve kaydet" mantığını yürütmez. Fakat yanlış HTML, doğru JavaScript'in kullanımını zorlaştırabilir.
+HTML içeriğin anlamını ve yapısını tanımlar. Başlık, paragraf, liste, bağlantı, düğme ve form alanı için uygun elementi seçersin. HTML tek başına "bu işi tamamla ve kaydet" mantığını yürütmez. Fakat yanlış HTML, doğru JavaScript'in kullanımını zorlaştırabilir.
 
 Bir ev benzetmesi kurarsak HTML odalar ve kapılar, CSS görünüm ve yerleşim, JavaScript davranış olur. Benzetmeyi fazla ileri götürme: bu teknolojiler bağımsız dosyalarda dursa da tarayıcıda birbirini etkiler. HTML'deki `name` form verisini, `id` seçim ve etiket bağını, `type` tarayıcı davranışını değiştirebilir.
 
@@ -490,7 +490,7 @@ Laboratuvarındaki `web` klasöründe `index.html` oluştur. Kodu bir kez elle y
 
 Dosyayı tarayıcıda aç. CSS dosyası henüz yoksa sayfa varsayılan biçimde görünür; bu beklenir. Başlıklar, iki iş satırı ve form bulunmalıdır. Boş başlıkla gönderince tarayıcı doğrulaması uyarabilir. Bu, sunucu doğrulamasının yerini almaz. Kullanıcı tarayıcının kontrollerini atlayarak HTTP isteği gönderebilir.
 
-`lang="tr"` belgenin dilini belirtir. UTF-8 Türkçe karakterlerin yorumlanmasına yardım eder. Viewport mobil sayfanın cihaz genişliğine göre düzenlenmesi için önemlidir. `title`, sekmenin başlığıdır; ekrandaki h1 ile aynı element değildir. Link stylesheet'in göreli yolunu verir. Dosyaların aynı klasörde olduğu varsayımı değişirse yol da değişir.
+`lang="tr"` belgenin dilini belirtir. UTF-8 Türkçe karakterlerin yorumlanmasına yardım eder. Viewport mobil sayfanın cihaz genişliğine göre düzenlenmesi için önemlidir. `title` sekmenin başlığı, h1 ise sayfadaki ana başlıktır. Link stylesheet'in göreli yolunu verir. Dosyaların aynı klasörde olduğu varsayımı değişirse yol da değişir.
 
 ## Semantik neden işine yarar?
 
@@ -506,19 +506,19 @@ Bir tablo gerçek satır-sütun ilişkili veriler için uygundur. Düğmeleri ya
 
 Örnekte kullanıcı Öncelik listesinde ekranda Acil görür; veri değeri `urgent` olur. Sunucu Türkçe görünen etiketi değil bu değeri bekleyebilir. API sözleşmesi `Urgent` isterken `urgent` gönderirsen davranış kullandığın sunucu dönüştürmesine bağlıdır; büyük/küçük harfi rastlantıya bırakma.
 
-Bir input'un id'si doğru ama name'i yoksa FormData içinde alanı bulamayabilirsin. Label'ın `for` değeri ile input id'si farklıysa etikete tıklamak alanı odaklamaz. İki element aynı id'yi kullanıyorsa seçici beklediğin öğeyi getirmeyebilir. Bu hatalar kod miktarı az olduğu için önemsiz değildir; formdaki veri yolunu doğrudan bozar.
+Bir input'un id'si doğru ama name'i yoksa FormData içinde alanı bulamayabilirsin. Label'ın `for` değeri ile input id'si farklıysa etikete tıklamak alanı odaklamaz. İki element aynı id'yi kullanıyorsa seçici beklediğin öğeyi getirmeyebilir. Küçük görünen bu hatalar formdaki veri yolunu doğrudan bozar.
 
-## Placeholder etiket değildir
+## Kalıcı etiket ve placeholder
 
 Placeholder, alan boşken görünen örnek veya ipucudur. Kullanıcı yazmaya başlayınca kaybolur. Kalıcı label'ın yerini tutmaz. E-posta alanına yalnız `placeholder="E-posta"` eklemek, özellikle ekran okuyucu ve hafıza yükü açısından zayıf tasarımdır. Görsel etiket ve programatik bağ birlikte olmalıdır.
 
-Hata mesajını yalnız kırmızı kenarlıkla anlatma. "İş başlığı gerekli" gibi metin ekle. Gerekirse `aria-describedby` ile yardımcı metni alana bağla. Her yere ARIA eklemek de çözüm değildir; yerleşik HTML doğru kullanıldığında çoğu temel davranış hazır gelir. İlk soru "hangi ARIA?" değil, "doğru element hangisi?" olsun.
+Hata mesajını yalnız kırmızı kenarlıkla anlatma. "İş başlığı gerekli" gibi metin ekle. Gerekirse `aria-describedby` ile yardımcı metni alana bağla. Önce yerleşik HTML davranışlarını kullan; yerleşik HTML doğru kullanıldığında çoğu temel davranış hazır gelir. İlk soru "hangi ARIA?" değil, "doğru element hangisi?" olsun.
 
 ## Form düğmelerindeki görünmez varsayım
 
 Form içindeki button için type yazmazsan varsayılan submit davranışı oluşabilir. Şifreyi Göster düğmesine basınca formun gönderilmesi bu nedenle olabilir. İşlem formu göndermemeliyse açıkça `type="button"` yaz. Formun asıl Kaydet düğmesinde `type="submit"` kullan.
 
-Bir formun `submit` olayını ele almak, yalnız Kaydet düğmesinin click olayını ele almaktan daha kapsayıcıdır. Kullanıcı Enter ile de gönderebilir. Davranışı öğrenirken tarayıcı varsayılanını fark et: sayfanın yenilenmesi her zaman JavaScript hatası değildir; formun doğal gönderim davranışı gerçekleşmiş olabilir.
+Bir formun `submit` olayını ele almak, yalnız Kaydet düğmesinin click olayını ele almaktan daha kapsayıcıdır. Kullanıcı Enter ile de gönderebilir. Davranışı öğrenirken tarayıcı varsayılanını fark et: sayfa yenilendiğinde formun doğal gönderim davranışı gerçekleşmiş olabilir.
 
 ## HTML hata laboratuvarı
 
@@ -630,7 +630,7 @@ select:focus-visible {
 }
 ```
 
-Geniş ekranda iki kart, dar ekranda tek sütun beklenir. Bu örnek için sınır 44rem seçildi; bütün projelerde kutsal değer değildir. İçerik nerede bozuluyorsa orada düzeni değiştirmelisin. Ekranın marka modelinden önce gerçek içeriğin sığmasını düşün.
+Geniş ekranda iki kart, dar ekranda tek sütun beklenir. Bu örnek için sınır 44rem seçildi; içerik için seçilmiş bir eşiktir. İçerik nerede bozuluyorsa orada düzeni değiştirmelisin. Ekranın marka modelinden önce gerçek içeriğin sığmasını düşün.
 
 ## px, rem, yüzde ve viewport
 
@@ -642,7 +642,7 @@ Yazıyı küçültmek her sığmama sorununu çözmez. Telefon ekranında 6 piks
 
 Flexbox bir satır veya sütun boyunca öğeleri dağıtmak için uygundur. Grid satır ve sütun ilişkisini birlikte kurar. Üst menüdeki düğmeler için flex, iki sütunlu panel düzeni için grid iyi başlangıç olabilir. Fakat ikisini yalnız ezberle seçme; hangi öğelerin birlikte hareket edeceğine bak.
 
-Bir şifre alanının altında kural listesi varsa input ve liste aynı mantıksal gruba ait olmalıdır. Grid içine bağımsız kardeşler halinde eklenirlerse otomatik yerleşim listeyi yan sütuna koyabilir. "Kodda after yazıyor, demek altında" düşüncesi yanlıştır. DOM sırası ile görsel yerleşim aynı değildir. CSS layout'unu da okuyabilmelisin.
+Bir şifre alanının altında kural listesi varsa input ve liste aynı mantıksal gruba ait olmalıdır. Grid içine bağımsız kardeşler halinde eklenirlerse otomatik yerleşim listeyi yan sütuna koyabilir. "Kodda after yazıyor, demek altında" düşüncesi yanlıştır. Görsel yerleşimi DOM sırasıyla birlikte CSS de belirler. CSS layout'unu da okuyabilmelisin.
 
 Örneğin her alanı bir kapsayıcıda toplayabilirsin:
 
@@ -654,11 +654,11 @@ Bir şifre alanının altında kural listesi varsa input ve liste aynı mantıks
 </div>
 ```
 
-Bu, input ve açıklamanın aynı grid hücresinde tutulmasını kolaylaştırır. Erişilebilirlik için açıklamaya id ekleyip input'un aria-describedby değerine bağlamak da mümkündür. Fakat sırf kapsayıcı eklemek yeterli değildir; label ve kontrolün anlam bağı korunmalıdır.
+Bu, input ve açıklamanın aynı grid hücresinde tutulmasını kolaylaştırır. Erişilebilirlik için açıklamaya id ekleyip input'un aria-describedby değerine bağlamak da mümkündür. Kapsayıcı eklerken label ve kontrolün anlam bağı korunmalıdır.
 
 ## Responsive tasarım ve taşma deneyi
 
-Responsive tasarım, içeriğin farklı kullanılabilir alanlara uyum sağlamasıdır. Yalnız üç cihaz boyutu için ekran görüntüsü üretmek değildir. Tarayıcıyı yavaşça daralt; düzenin hangi aralıkta bozulduğunu gözle. Çok uzun kelime veya e-posta adresi ekle. Boş liste ve yüz satırlı listeyle dene. Düğmenin yüklenirken metni değişince sığıp sığmadığını kontrol et.
+Responsive tasarım, içeriğin farklı kullanılabilir alanlara uyum sağlamasıdır. Düzeni ara genişliklerde de kontrol ederek geliştirirsin. Tarayıcıyı yavaşça daralt; düzenin hangi aralıkta bozulduğunu gözle. Çok uzun kelime veya e-posta adresi ekle. Boş liste ve yüz satırlı listeyle dene. Düğmenin yüklenirken metni değişince sığıp sığmadığını kontrol et.
 
 Dar ekranda yatay tablo bazen bilinçli olarak kaydırılabilir. Bu durumda bütün sayfayı değil, belirli tablo kabını kaydırmak daha anlaşılırdır. Finans gibi satır-sütun ilişkisi güçlü verilerde kart dönüşümü her zaman en iyi çözüm değildir. Karar, kullanıcı hangi bilgiyi karşılaştıracak sorusuyla verilmelidir.
 
@@ -666,7 +666,7 @@ Dar ekranda yatay tablo bazen bilinçli olarak kaydırılabilir. Bu durumda büt
 
 Kartlardan birine kasıtlı olarak `width: 700px` ekle. 390 px görünümde taşmayı gözle. DevTools Elements'te kartı seç, Styles panelinde bu satırı kapat. Taşma kayboldu mu? Sonra sorunu kalıcı dosyada düzelt. DevTools'ta yaptığın geçici değişiklik dosyana otomatik kaydedilmez; sayfayı yenileyince kaybolabilir.
 
-İkinci deneyde `outline: none` ekle ve Tab ile formu dolaş. Nerede olduğunu seçebiliyor musun? Satırı kaldır ve focus-visible kuralını gözle. Görünüm hataları yalnız estetik değildir; bir kontrolün klavyeyle takip edilememesi işi yapmayı engelleyebilir. Erişilebilirlik ayrı son kontrol değil, temel işlev kalitesidir.
+İkinci deneyde `outline: none` ekle ve Tab ile formu dolaş. Nerede olduğunu seçebiliyor musun? Satırı kaldır ve focus-visible kuralını gözle. Görünüm hataları kullanımı da etkiler; bir kontrolün klavyeyle takip edilememesi işi yapmayı engelleyebilir. Erişilebilirlik ayrı son kontrol değil, temel işlev kalitesidir.
 
 ## CSS alıştırmaları
 
@@ -680,7 +680,7 @@ Kaynak: [MDN: Responsive web design](https://developer.mozilla.org/en-US/docs/Le
 
 # DevTools ile hata ayıklamak
 
-## Hata ayıklama, rastgele değiştirmek değildir
+## Hata ayıklama: bir tahmini tek deneyle sınamak
 
 Hata ayıklama bir hipotezi sınama işidir. "Sunucu bozuk" bir hipotez olabilir ama çok geniştir. "Kaydet sırasında oluşan istek 400 dönüyor çünkü priority boş gönderiliyor" daha sınanabilirdir. Önce hatayı tekrar üret. Sonra beklenen ve gerçekleşeni yaz. Ardından tek bir sınırı kontrol et. Aynı anda beş dosyayı değiştirirsen hangi değişikliğin etki yaptığını bilemezsin.
 
@@ -688,7 +688,7 @@ Bir hata notunu şu biçimde tut: ortam, girdi, adımlar, beklenen, gerçek, kan
 
 ## Elements, Console ve Network
 
-Elements paneli tarayıcının o anki DOM'unu ve stilini gösterir. Kaynak HTML ile aynı olmak zorunda değildir; JavaScript DOM'u değiştirmiş olabilir. Console hataları, logları ve kendi küçük ifadelerini gösterir. Network ağ isteklerini ve yanıtlarını gösterir. Her panel farklı soruyu yanıtlar.
+Elements paneli tarayıcının o anki DOM'unu ve stilini gösterir. Kaynak HTML’den farklılaşabilir; JavaScript DOM'u değiştirmiş olabilir. Console hataları, logları ve kendi küçük ifadelerini gösterir. Network ağ isteklerini ve yanıtlarını gösterir. Her panel farklı soruyu yanıtlar.
 
 Örneğin düğme görünmüyorsa Elements'te DOM'da var mı diye bak. Varsa display none, visibility, üstüne binen katman, konum veya boyut sorunu olabilir. DOM'da yoksa render koşulu veya önceki JavaScript hatası olabilir. API isteği başarısızsa Network'teki request ve response önemlidir. Hangi panelin hangi kanıtı verdiğini bilmek zaman kazandırır.
 
@@ -727,7 +727,7 @@ Beklediğin 150 iken metin birleşimi görürsün. Sources panelinde `result += 
 
 Kaydet'e basmadan önce Network listesini temizle. İşlemi bir kez yap. İlgili isteği seç ve şu sırayla bak: URL, metod, durum kodu, gönderilen veri, yanıt. İstek hiç oluşmadıysa olay işleyicisi veya istemci doğrulaması olabilir. İstek oluştuysa artık ağ sınırındasın; sunucu cevabını oku.
 
-400 dönen bir istekte payload'ı beklenen sözleşmeyle karşılaştır. Örneğin sunucu `pilotDays` için sayı isterken `"30"` metni gönderilmiş olabilir. Bazı framework'ler dönüştürür, bazı ayarlarda reddeder. Dönüşüme güvenmek yerine istemcinin ne gönderdiğini bil. Yanıt gövdesindeki hatayı okurken gerçek sırları paylaşmadan küçük örnek oluştur.
+400 dönen bir istekte payload'ı beklenen sözleşmeyle karşılaştır. Örneğin sunucu `denemeDays` için sayı isterken `"30"` metni gönderilmiş olabilir. Bazı framework'ler dönüştürür, bazı ayarlarda reddeder. Dönüşüme güvenmek yerine istemcinin ne gönderdiğini bil. Yanıt gövdesindeki hatayı okurken gerçek sırları paylaşmadan küçük örnek oluştur.
 
 Network'te `Preserve log` yönlendirme boyunca kayıtları tutmaya yardım edebilir. `Disable cache` eski dosya şüphesini sınamak için yararlı olabilir. Fakat test ettiğin koşulu kaydet: cache kapalıyken başarılı olması gerçek kullanıcının koşulunda da başarılı olacağı anlamına gelmez. Bir tanı ayarını ürün çözümü diye raporlama.
 
@@ -741,11 +741,11 @@ Bir hata yalnız belirli hesapta oluşuyorsa hemen o hesabın verisini dışa ak
 
 Senaryo: İş ekledikten sonra sayfa yenilenene kadar yeni satır görünmüyor. Hipotez A: sunucu kaydetmedi. Hipotez B: sunucu kaydetti ama ön yüz listeyi yenilemedi. Önce POST yanıtını kontrol et. Ardından GET ile listeyi oku. Yeni kayıt GET'te varsa A zayıflar. DOM'da yoksa render/state yolunu incele.
 
-Bu deneyin sonucu "front-end bozuk" gibi geniş bir cümlede kalmamalı. Daha doğru sonuç şu olabilir: "POST 201 döndü ve sonraki GET kaydı içeriyor. Ancak submit handler state.items dizisini güncellemediği için render eski listeyi kullanıyor." Böyle bir cümle, düzeltilecek yere doğrudan işaret eder.
+Bu dene sonucu "front-end bozuk" gibi geniş bir cümlede kalmamalı. Daha doğru sonuç şu olabilir: "POST 201 döndü ve sonraki GET kaydı içeriyor. Ancak submit handler state.items dizisini güncellemediği için render eski listeyi kullanıyor." Böyle bir cümle, düzeltilecek yere doğrudan işaret eder.
 
 ## Alıştırma: kanıt zinciri
 
-Aynı hayali hata için üç farklı kanıt üret: ekran görüntüsü, ağ kaydı ve kod satırı. Hangisi tek başına neden yeterli değil? Ekran görüntüsü durumu gösterir ama veri kaydedildi mi söylemez. Ağ kaydı yanıtı gösterir ama bütün DOM düzenini anlatmaz. Kod satırı olası mekanizmayı gösterir ama o dalın gerçekten çalıştığını her zaman kanıtlamaz. Üçü birlikte daha güçlüdür.
+Aynı hayali hata için üç farklı kanıt üret: ekran görüntüsü, ağ kaydı ve kod satırı. Hangisi tek başına neden yeterli değil? Ekran görüntüsü durumu gösterir ama veri kaydedildi mi söylemez. Ağ kaydı yanıtı gösterir ama bütün DOM düzenini anlatmaz. Kod satırı olası mekanmayı gösterir ama o dalın gerçekten çalıştığını her zaman kanıtlamaz. Üçü birlikte daha güçlüdür.
 
 Kaynak: [Chrome DevTools: JavaScript hata ayıklama](https://developer.chrome.com/docs/devtools/javascript). Bu bölümdeki basket ve iş listesi hataları özgün öğretim örnekleridir.
 
@@ -773,7 +773,7 @@ Kaydet kanıtı dosyanın yeni içeriği, commit kanıtı yerel git log, push ka
 
 ## PR açıklaması alıştırmasının çözümü
 
-Örnek açıklama: "Firma açma formuna pilot süresi eklendi: boş 30 gün, 0 pilotsuz, üst sınır 180. İki ilgili UI testi çalıştırıldı ve geçti. Backend testi çalıştırılmadı; sunucu sınırları için henüz koşum kanıtı yok." Bu açıklama ürünün kesin hatasız olduğunu iddia etmez; inceleyen kişiye değerlendireceği açık kapsam verir.
+Örnek açıklama: "Firma açma formuna deneme süresi eklendi: boş 30 gün, 0 denemesuz, üst sınır 180. İki ilgili UI testi çalıştırıldı ve geçti. Backend testi çalıştırılmadı; sunucu sınırları için henüz koşum kanıtı yok." Bu açıklama ürünün kesin hatasız olduğunu iddia etmez; inceleyen kişiye değerlendireceği açık kapsam verir.
 
 ## HTML alıştırmalarının çözümü
 
