@@ -1,4 +1,6 @@
-# Sıfırdan Mid-Level'a Yazılım (Claude baskısı)
+# Sıfırdan Mid-Level'a Yazılım (Kitap 2)
+
+Hazırlayan: **Murat AKTAŞ** ([Mur-47](https://github.com/Mur-47))
 
 Bu depodaki ikinci kitap: aynı hedefe (sıfırdan orta seviye geliştiriciye) daha geniş ve derin bir anlatımla giden, yaklaşık **770 sayfalık** Türkçe bir çalışma kitabı. Konular kurgusal bir örnek proje (**AsansörTakip**: asansör bakım firmaları için bir web uygulaması) üzerinden anlatılır.
 
@@ -26,7 +28,7 @@ Her konu aynı sırayla ilerler: ne işe yarar → nasıl çalışır → satır
 
 ## Doğrulama ve sorumluluk
 
-Kitap yapay zekâ (Anthropic Claude ve alt ajanları) yardımıyla yazıldı. Örneklerin büyük kısmı yazım sırasında bir Windows makinede çalıştırıldı: .NET 10, EF Core, Node 24, PowerShell 5.1, Git, Playwright/Edge. Çalıştırılamayanlar (örneğin Docker daemon gerektirenler) metinde belirtildi. Yine de hata içerebilir; sürümler ve hata mesajları zamanla değişir. Hata bulursan bölüm, beklenen ve gerçek sonuçla birlikte issue aç.
+Örneklerin büyük kısmı yazım sırasında bir Windows makinede çalıştırıldı: .NET 10, EF Core, Node 24, PowerShell 5.1, Git, Playwright/Edge. Çalıştırılamayanlar (örneğin Docker daemon gerektirenler) metinde belirtildi. Yine de hata içerebilir; sürümler ve hata mesajları zamanla değişir. Hata bulursan bölüm, beklenen ve gerçek sonuçla birlikte issue aç.
 
 ## Lisans
 
