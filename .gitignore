@@ -14,3 +14,5 @@ obj/
 *.trx
 *.log
 .DS_Store
+.publication-private.json
+dist/

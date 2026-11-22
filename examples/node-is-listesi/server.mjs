@@ -17,26 +17,43 @@ function json(response, status, value) {
   response.end(JSON.stringify(value));
 }
 
-async function bodyJson(request) {
-  const chunks = [];
-  let size = 0;
-  let tooLarge = false;
-  for await (const chunk of request) {
-    size += chunk.length;
-    if (size > 8192) {
-      tooLarge = true;
-      chunks.length = 0;
-    }
-    if (!tooLarge) chunks.push(chunk);
-  }
-  if (tooLarge) {
-    throw new InputError('İstek gövdesi çok büyük.');
-  }
-  try {
-    return JSON.parse(Buffer.concat(chunks).toString('utf8'));
-  } catch {
-    throw new InputError('Geçerli JSON gönderin.');
-  }
+function bodyJson(request, response) {
+  return new Promise((resolve, reject) => {
+    const chunks = [];
+    let size = 0;
+    const cleanup = () => {
+      request.off('data', data);
+      request.off('end', end);
+      request.off('error', fail);
+      request.off('aborted', aborted);
+    };
+    const fail = error => { cleanup(); reject(error); };
+    const aborted = () => fail(new InputError('İstek kesildi.'));
+    const data = chunk => {
+      size += chunk.length;
+      if (size > 8192) {
+        cleanup();
+        chunks.length = 0;
+        request.pause();
+        // Send 413 before closing the socket; do not drain an endless body.
+        response.setHeader('Connection', 'close');
+        response.once('finish', () => request.destroy());
+        json(response, 413, { error: 'İstek gövdesi çok büyük.' });
+        reject(new InputError('İstek gövdesi çok büyük.'));
+        return;
+      }
+      chunks.push(chunk);
+    };
+    const end = () => {
+      cleanup();
+      try { resolve(JSON.parse(Buffer.concat(chunks).toString('utf8'))); }
+      catch { reject(new InputError('Geçerli JSON gönderin.')); }
+    };
+    request.on('data', data);
+    request.once('end', end);
+    request.once('error', fail);
+    request.once('aborted', aborted);
+  });
 }
 
 const server = http.createServer(async (request, response) => {
@@ -60,7 +77,7 @@ const server = http.createServer(async (request, response) => {
         json(response, 415, { error: 'JSON gerekli.' });
         return;
       }
-      const job = store.add(await bodyJson(request));
+      const job = store.add(await bodyJson(request, response));
       json(response, 201, job);
       return;
     }
@@ -74,6 +91,7 @@ const server = http.createServer(async (request, response) => {
     }
     json(response, 404, { error: 'Adres bulunamadı.' });
   } catch (error) {
+    if (response.writableEnded || response.destroyed) return;
     if (error instanceof InputError) {
       json(response, 400, { error: error.message });
     } else {

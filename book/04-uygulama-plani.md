@@ -32,7 +32,7 @@ Konu zor gelirse takvimi uzat; sıradaki başlığa sırf tarih geldi diye geçm
 
 **11. hafta - Test.** Bir iş kuralını DOM'dan ayır. Saf fonksiyona en az altı test yaz. Sonra fonksiyonu bilerek bozup doğru testin düştüğünü doğrula. Teslimin test sayısı değil; her testin hangi riski yakaladığını anlatan kısa açıklamadır.
 
-**12. hafta - SQL.** Firma, asansör ve iş tablolarını eğitim veritabanında kur. Primary key, foreign key ve JOIN kullan. Bir firmanın iş sayısını bul; hiç işi olmayan firmayı kaybetmeden listele. Teslimin sorgular ve hangi satırın neden sonuçta bulunduğudur.
+**12. hafta - SQL.** Firma, cihaz ve iş tablolarını eğitim veritabanında kur. Primary key, foreign key ve JOIN kullan. Bir firmanın iş sayısını bul; hiç işi olmayan firmayı kaybetmeden listele. Teslimin sorgular ve hangi satırın neden sonuçta bulunduğudur.
 
 **13. hafta - C#.** Bir JavaScript iş kuralını C# ile yeniden yaz. Tür sisteminin hangi hatayı derlemede yakaladığını, hangi hatayı yakalamadığını göster. Null değer, tarih ve para alanlarını düşün. Teslimin eşdeğer girişlerde iki uygulamanın aynı sonucu verdiği küçük testtir.
 
@@ -70,7 +70,7 @@ Bir ürünün bütün ekranlarını kopyalamak öğrenme için iyi bir ilk hedef
 
 ## Veri modeli
 
-Firma için Id ve Name; asansör için Id, TenantId, Code; iş için Id, TenantId, ElevatorId, Title, Status, DueDate ve Version düşün. İlişkileri kağıtta çiz. Bir işin asansörü başka firmadaysa ne olacağını önce karar ver. Sadece istemcinin doğru seçim yaptığını varsayma. Tarih alanının takvim günü mü, bir an mı olduğuna karar ver; iki anlamı aynı string ile gelişigüzel taşıma.
+Firma için Id ve Name; cihaz için Id, TenantId, Code; iş için Id, TenantId, ElevatorId, Title, Status, DueDate ve Version düşün. İlişkileri kağıtta çiz. Bir işin cihazü başka firmadaysa ne olacağını önce karar ver. Sadece istemcinin doğru seçim yaptığını varsayma. Tarih alanının takvim günü mü, bir an mı olduğuna karar ver; iki anlamı aynı string ile gelişigüzel taşıma.
 
 Kimlik sistemi bu projenin ayrı bir aşamasıdır. İlk yerel deneyde kimliği taklit edebilirsin; bunu dosyada ve README'de açıkça "yalnız yerel öğrenme" diye işaretle. Üretime benzer sürümde kimlik güvenilir oturumdan gelir. İstek gövdesindeki TenantId kullanıcının hangi firmaya ait olduğunu kanıtlamaz. Böyle bir gövdeyi değiştirince erişim sınırı değişiyorsa uygulama güvenli değildir.
 
@@ -78,7 +78,7 @@ Kimlik sistemi bu projenin ayrı bir aşamasıdır. İlk yerel deneyde kimliği 
 
 1. İş listesi açıldığında yükleniyor, boş liste, dolu liste ve hata durumları ayrı görünür.
 2. Başlık boş veya belirlediğin sınırdan uzunsa sunucu 400 döner; yalnız HTML required niteliğine güvenilmez.
-3. İş eklenince doğru firma ve asansör ilişkisi kaydedilir; başka firmanın asansör kimliği reddedilir.
+3. İş eklenince doğru firma ve cihaz ilişkisi kaydedilir; başka firmanın cihaz kimliği reddedilir.
 4. Tamamlanmış işin ekranındaki durum, sayfa yenilenince de korunur.
 5. Aynı düğmeye iki kez basma senaryosu tanımlıdır: istemci düğmeyi kilitler ve önemli yazma işinde sunucu da tekrarı yönetir.
 6. İki eski kopyadan ikinci kayıt, version uyuşmazlığıyla kontrollü reddedilir; ilk değişiklik ezilmez.
@@ -141,7 +141,7 @@ console.log('Sunucu isteği kabul etti.');
 
 ## Vaka 2: doğru kişi yanlış firmanın kaydını görüyor
 
-İpucu: endpoint, URL'deki kaydı yalnız Id ile arıyor. İstemci listeyi firma filtresiyle gösteriyor, bu yüzden normal kullanımda sorun görünmüyor. Fakat başka firmanın Id değeri URL'ye yazıldığında kayıt dönüyor.
+İpucu: endpoint, URL'deki kaydı yalnız Id ile arıyor. İstemci listeyi firma filtresiyle gösteriyor, bu yüzden normal kullanımda sor görünmüyor. Fakat başka firmanın Id değeri URL'ye yazıldığında kayıt dönüyor.
 
 Çözüm ilkesi: istemcinin filtresi bir güvenlik sınırı değildir. Sunucu kaydı güvenilir oturumdan gelen firma ve izinli operasyon kapsamıyla birlikte aramalıdır. ORM filtreleri yardımcıdır; açık istisnalar ayrıca değerlendirilir. Testte iki firma oluştur ve A kullanıcısıyla B kaydını doğrudan iste. Güvenlik testi düğmenin gizli olduğuna değil, sunucunun erişimi reddettiğine bakar.
 
@@ -185,7 +185,7 @@ console.log('Sunucu isteği kabul etti.');
 
 ## Dosyayı baştan sona okumak zorunda değilsin
 
-Bir özellikte önce kullanıcı davranışını tek cümleyle yaz: "Yönetici yeni firma açınca pilot tarihi oluşuyor." Sonra giriş noktasını bul: düğme, form submit olayı veya API endpoint. Verinin şeklini izle: alan adı nedir, boş değer nasıl taşınır, sunucu hangi DTO'ya bağlar? İş kuralını bul: varsayılan nerede seçilir, yetki nerede kontrol edilir? Kalıcı değişikliği ve yanıtı bul. Sonra bu akışın testini ara.
+Bir özellikte önce kullanıcı davranışını tek cümleyle yaz: "Yönetici yeni firma açınca deneme tarihi oluşuyor." Sonra giriş noktasını bul: düğme, form submit olayı veya API endpoint. Verinin şeklini izle: alan adı nedir, boş değer nasıl taşınır, sunucu hangi DTO'ya bağlar? İş kuralını bul: varsayılan nerede seçilir, yetki nerede kontrol edilir? Kalıcı değişikliği ve yanıtı bul. Sonra bu akışın testini ara.
 
 Bu haritayı çıkarmadan projedeki bütün sınıfları ezberlemeye çalışma. Bir dosya adı tanıdık gelmediğinde önce hangi katmana ait olduğunu belirle. `wwwroot` genelde tarayıcı varlıklarını, `Features` işlevsel sunucu parçalarını, `Infrastructure` veri veya dış dünya bağlantılarını taşıyabilir. Klasör adı tek başına güvenlik veya doğruluk kanıtı değildir; gerçek çağrıyı izle.
 
@@ -256,14 +256,14 @@ P1/P2/P3 gibi etiketler ekipten ekibe değişebilir. Kendi ekibinde hangi riskin
 ## Veritabanı ve ORM
 
 - **SQL:** İlişkisel veritabanına sorgu ve değişiklik bildiren dil.
-- **SQLite:** Dosya tabanlı ilişkisel veritabanı motoru; bir metin dosyasından ibaret değildir.
+- **SQLite:** Dosya tabanlı ilişkisel veritabanı motoru; SQL sorguları, kısıtlar ve transaction desteği sunar.
 - **PostgreSQL / SQL Server:** Ayrı sunucu olarak kullanılan ilişkisel veritabanı ürünleri. Taşınırken SQL ve sağlayıcı davranışı farkları incelenir.
 - **ORM:** Nesneler ile ilişkisel tablo/veri işlemleri arasında eşleme sağlayan yaklaşım.
-- **Entity Framework / EF Core:** Microsoft'un ORM ailesi. EF6 ile EF Core aynı paket ve aynı mimari değildir.
+- **Entity Framework / EF Core:** Microsoft'un ORM ailesi. EF6 ve EF Core farklı paket ve mimari hatlarıdır.
 - **DbContext:** EF Core'da veri erişimi, takip ve bir çalışma birimi çevresinde kullanılan nesne.
 - **LINQ:** C# içinde veri sorgularını ifade etme yaklaşımı. Veritabanı sağlayıcısının neyi SQL'e çevirdiğini bilmek gerekir.
 - **Migration:** Veritabanı şemasını sürümler arasında değiştirme adımı; veri yedeği değildir.
-- **Snapshot:** EF Core migration üretiminde model karşılaştırması için saklanan model görünümü; canlı veritabanının tam kopyası değildir.
+- **Snapshot:** EF Core migration üretiminde model karşılaştırması için saklanan model görünümü; verinin kendisini içermez.
 - **Index:** Belirli erişimleri hızlandıran veri yapısı; yazma ve depolama maliyeti vardır.
 - **Transaction:** Bir grup değişikliği birlikte başarı/başarısızlık sınırında ele alma.
 - **Concurrency:** Aynı veriye birden fazla işlemin yakın zamanda erişmesi. Yarış koşulları için açık karar gerekir.
@@ -291,15 +291,15 @@ P1/P2/P3 gibi etiketler ekipten ekibe değişebilir. Kendi ekibinde hangi riskin
 - **Environment:** Development, test, staging ve production gibi farklı çalışma bağlamı.
 - **Docker image:** Uygulama ve çalışma gereksinimlerinin katmanlı paket görüntüsü.
 - **Container:** Image'dan başlatılan, yalıtılmış süreç ve dosya sistemi bağlamı.
-- **Volume:** Container ömründen bağımsız veri tutmak için kullanılan Docker depolama mekanizması.
+- **Volume:** Container ömründen bağımsız veri tutmak için kullanılan Docker depolama mekanması.
 - **Docker Compose:** Birbiriyle ilişkili servisleri bildirimsel dosyayla tanımlayıp yönetme aracı.
 - **Reverse proxy:** İstemci isteğini arkadaki uygulamaya ileten sunucu; Caddy bu görevi yapabilir.
 - **Observability:** Log, metrik ve trace gibi kanıtlardan sistem davranışını anlayabilme.
-- **Rollback:** Bir değişiklikten önceki sürüme dönme. Veritabanı dönüşü ile uygulama dönüşü aynı riskte değildir.
+- **Rollback:** Bir değişiklikten önceki sürüme dönme. Uygulama dosyası ve veritabanı şeması için geri dönüş planlarını ayrı yap.
 - **RPO / RTO:** Kabul edilebilir veri kaybı aralığı ve toparlanma süresi hedefleri.
 
 # Bundan sonra ne öğrenmelisin?
 
-Önce bu kitabın tek bir yığınıyla bağımsız küçük uygulama bitir. Sonra TypeScript ve bir arayüz aracını, örneğin React'i, aynı özellik üzerinde dene. Ardından sunucu tarafında daha büyük SQL motoru, performans ölçümü, erişilebilirlik denetimi ve sistem tasarımı öğren. Her yeni araç için aynı soruyu sor: mevcut hangi sorunu çözüyor, hangi maliyeti ekliyor? Bir sorun yaşamadan Kubernetes, microservice veya çok sayıda bulut hizmeti eklemek genellikle öğrenme odağını dağıtır.
+Önce bu kitabın tek bir yığınıyla bağımsız küçük uygulama bitir. Sonra TypeScript ve bir arayüz aracını, örneğin React'i, aynı özellik üzerinde dene. Ardından sunucu tarafında daha büyük SQL motoru, performans ölçümü, erişilebilirlik denetimi ve sistem tasarımı öğren. Her yeni araç için aynı soruyu sor: mevcut hangi sorunu çözüyor, hangi maliyeti ekliyor? Bir sor yaşamadan Kubernetes, microservice veya çok sayıda bulut hizmeti eklemek genellikle öğrenme odağını dağıtır.
 
 Orta seviye geliştirici olma yolunda bir sonraki adım daha fazla terim biriktirmek değil; farklı sorunlar üzerinde aynı düşünme disiplinini tekrar kullanmaktır. Gereksinimi netleştir, verinin akışını çiz, küçük değişiklik yap, sonucu ölç, sınırını yaz ve geri bildirim al. Bu döngüyü bağımsız uygulayabildiğinde kitabın amacı gerçekleşmeye başlamıştır.

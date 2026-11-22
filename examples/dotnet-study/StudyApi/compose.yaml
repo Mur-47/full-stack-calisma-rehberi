@@ -1,0 +1,14 @@
+services:
+  api:
+    build: .
+    image: study-api:local
+    ports:
+      - "127.0.0.1:5311:8080"
+    volumes:
+      - study-data:/data
+    environment:
+      DatabasePath: /data/study.db
+    restart: "no"
+
+volumes:
+  study-data:

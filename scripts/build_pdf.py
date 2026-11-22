@@ -117,7 +117,7 @@ class Cover(Flowable):
         p=Paragraph('Git / GitHub / HTML / CSS / JavaScript / Node.js<br/>C# / ASP.NET Core / SQL / ORM / EF Core<br/>Docker / Compose / Caddy / Test / Güvenlik / Debug',ParagraphStyle('CoverTools',fontName='Body',fontSize=10.5,leading=18,textColor=colors.white))
         pw,ph=p.wrap(self.width,100);p.drawOn(c,0,76)
         c.setFont('Body',9);c.setFillColor(ACCENT)
-        c.drawString(0,30,'22 Kasım 2026  |  24 haftalık rota ve bitirme projesi')
+        c.drawString(0,30,'v0.2.0 / 23 Kasım 2026  |  24 haftalık rota')
 
 class BookDoc(BaseDocTemplate):
     def __init__(self,path):
@@ -190,7 +190,7 @@ def main():
     story=[Cover(),PageBreak()]
     story.append(Paragraph('İçindekiler',styles['h1']))
     story.append(Paragraph('Bölüm adları tıklanabilir. PDF okuyucunuzun yer imleri panelinde alt başlıklar da bulunur.',styles['body']))
-    toc=TableOfContents();toc.levelStyles=[ParagraphStyle('TOC1',fontName='Body',fontSize=10.2,leading=16.5,spaceBefore=4,leftIndent=0,firstLineIndent=0,rightIndent=26)]
+    toc=TableOfContents();toc.levelStyles=[ParagraphStyle('TOC1',fontName='Body',fontSize=9.6,leading=14.2,spaceBefore=2,leftIndent=0,firstLineIndent=0,rightIndent=26)]
     story.append(toc);story.append(PageBreak())
     counter=[0]
     for p in parts:parse_markdown(p.read_text(encoding='utf-8'),story,counter)
