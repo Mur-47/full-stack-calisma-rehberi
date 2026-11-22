@@ -2,7 +2,7 @@
 
 ## v0.2.0 — 23 Kasım 2026
 
-- Claude'un PR #1'indeki PowerShell UTF-8, C# üst düzey deyim sırası, PORT, URL kodlama ve Git laboratuvarı düzeltmeleri alındı.
+- PR #1'deki PowerShell UTF-8, C# üst düzey deyim sırası, PORT, URL kodlama ve Git laboratuvarı düzeltmeleri alındı.
 - Kişiye/kuruma özel yayın denetimi terimleri Git dışında tutulan yerel dosyaya veya ortam değişkenine taşındı. Kaynak kod ve PDF aynı politikayla taranıyor; terim değerleri hata çıktısına yazılmıyor.
 - Node gövde sınırı erken 413 ve bağlantı kapatmayla uygulanıyor. Bitmeyen büyük istek için regresyon kontrolü eklendi; HTTP denetimi kendi boş portunu seçiyor.
 - .NET yanıtları JobResponse DTO kullanıyor. Context üzerindeki firma kimliğiyle query filter örneği ve ExecuteUpdate/Delete/ExecuteSql ayrımı düzeltildi.

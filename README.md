@@ -25,11 +25,11 @@ Bu bir **çalışma kitabıdır**; tek başına mesleki seviye, iş veya sertifi
 garantisi vermez. Okumak kadar yazmak, bozmak, test etmek ve geri bildirim
 almak gerekir. Örnekler öğretim içindir; üretime hazır altyapı değildir.
 
-## İkinci kitap: Sıfırdan Mid-Level'a Yazılım (Claude baskısı)
+## Kitap 2: Sıfırdan Mid-Level'a Yazılım
 
 Aynı konuları çok daha ayrıntılı anlatan, yaklaşık 770 sayfalık ikinci bir Türkçe kitap da bu depoda. Ek olarak TypeScript, React, Linux, xUnit testleri, güvenlik ve mülakat soruları gibi konuları da kapsıyor.
 
-- **[PDF'yi aç](claude-kitap/sifirdan-mid-level-yazilim.pdf)** · [Kitap hakkında](claude-kitap/README.md)
+- **[PDF'yi aç](kitap-2/sifirdan-mid-level-yazilim.pdf)** · [Kitap hakkında](kitap-2/README.md)
 
 ## Nereden başlamalı?
 

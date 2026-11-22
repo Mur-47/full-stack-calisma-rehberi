@@ -80,7 +80,7 @@ npm test
 - Kitaptaki her bağımsız kod kesiti derlenmedi. Çalışan örnek projelerin sonuçları, bütün kitabın her olası girdide doğrulandığı anlamına gelmez.
 - Mini API'lerde kimlik doğrulaması yok. TenantStudyDb yalnız filtre davranışı laboratuvarıdır; firma izolasyonunun tamamlanmış ürün uygulaması olarak sunulmaz.
 - Yükseltme testi mevcut ilk migration'ın tekrar uygulanmasını sınar. Henüz ikinci şemaya eski veriden geçiş senaryosu yok.
-- GitHub Actions üzerinde bu sürümün CI koşusu yapılmadı; yukarıdaki sonuçlar CO'nun yerel koşularıdır. Claude'un önceki teslim beyanları bunlarla birleştirilmedi.
+- GitHub Actions üzerinde bu sürümün CI koşusu yapılmadı; yukarıdaki sonuçlar CO'nun yerel koşularıdır.
 - v0.1.0 etiketi ve eski Git geçmişi yeniden yazılmadı. Özel terimlerin kaynak betikten kaldırılması ileriye dönük düzeltmedir.
 
 Rehber uygulama ve geri bildirimle geliştirilen öğrenme malzemesidir. Örnekleri yerel laboratuvarda kullan; gerçek ürün için yetki, veri koruma, operasyon ve bağımlılık kararlarını ayrıca tasarla.
