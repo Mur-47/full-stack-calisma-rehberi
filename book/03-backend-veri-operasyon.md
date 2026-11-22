@@ -97,6 +97,8 @@ public class Job
 }
 ```
 
+> Not: `Program.cs` dosyasında üst düzey deyimler (top-level statements) kullanıyorsan `class` tanımını dosyanın en altına ya da ayrı bir `Job.cs` dosyasına koy. Sınıfı `var first = ...` satırlarından önce yazarsan derleyici CS8803 hatası verir ("Üst düzey deyimler tür bildirimlerinden önce gelmelidir").
+
 `public`, dışarıdan erişime izin verir. `get` okuma, `set` atama erişimidir. `DateTime?`, tarih bilgisinin boş olabileceğini belirtir. Bitmemiş işte `CompletedAt` bulunmaması doğaldır. Boş tarihi `DateTime.MinValue` gibi anlamsız bir değerle doldurmak yerine “değer yok” durumunu açık modellemek daha okunaklıdır.
 
 ```csharp
@@ -557,7 +559,7 @@ Invoke-RestMethod http://127.0.0.1:5311/health
 $body = @{ title = "Örnek asansör kapı kontrolü" } |
     ConvertTo-Json
 Invoke-RestMethod http://127.0.0.1:5311/api/jobs `
-    -Method Post -ContentType application/json -Body $body
+    -Method Post -ContentType 'application/json; charset=utf-8' -Body $body
 
 Invoke-RestMethod http://127.0.0.1:5311/api/jobs
 ```
@@ -576,7 +578,7 @@ $body = @{
 } | ConvertTo-Json
 
 Invoke-RestMethod http://127.0.0.1:5311/api/jobs/1 `
-    -Method Put -ContentType application/json -Body $body
+    -Method Put -ContentType 'application/json; charset=utf-8' -Body $body
 ```
 
 Yanıtta Version=2 görmelisiniz. Aynı eski gövdeyi tekrar gönderin. Bu kez 409 beklenir. PowerShell hata nesnesi gösterebilir; tarayıcı Network paneli veya başka HTTP istemcisiyle yanıt gövdesini de inceleyebilirsiniz. Sunucu çökmedi; eski sürümle yapılan güncellemeyi bilinçli reddetti.
@@ -588,7 +590,7 @@ Burada iki koruma vardır. Baştaki Version karşılaştırması istemcinin zate
 ```powershell
 $bad = @{ title = "   " } | ConvertTo-Json
 Invoke-RestMethod http://127.0.0.1:5311/api/jobs `
-    -Method Post -ContentType application/json -Body $bad
+    -Method Post -ContentType 'application/json; charset=utf-8' -Body $bad
 ```
 
 400 beklenir. Şimdi 201 karakterlik başlık gönderin. Yine 400 beklenir. Sonra olmayan bir Id okuyun, 404 bekleyin. Bu küçük testler “mutlu yol” dışında davranışı düşünmenizi sağlar. İyi geliştirici yalnız doğru formun çalışmasını değil, yanlış isteklerin güvenli ve anlaşılır reddedilmesini de tasarlar.

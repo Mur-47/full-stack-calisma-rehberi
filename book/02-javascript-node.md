@@ -572,7 +572,7 @@ let revision = 0;
 
 async function refreshJobs(city) {
   const current = ++revision;
-  const jobs = await jsonGet(`/api/jobs?city=${city}`);
+  const jobs = await jsonGet(`/api/jobs?city=${encodeURIComponent(city)}`);
   if (current !== revision) return;
   renderJobs(jobs);
 }
@@ -589,7 +589,7 @@ async function refreshJobs(city) {
   controller?.abort();
   controller = new AbortController();
   try {
-    const jobs = await jsonGet('/api/jobs?city=' + city, {
+    const jobs = await jsonGet('/api/jobs?city=' + encodeURIComponent(city), {
       signal: controller.signal
     });
     renderJobs(jobs);
@@ -909,8 +909,9 @@ const server = http.createServer(async (request, response) => {
 
 server.requestTimeout = 10000;
 server.headersTimeout = 10000;
-server.listen(5310, '127.0.0.1', () => {
-  console.log('Eğitim: http://127.0.0.1:5310');
+const port = Number(process.env.PORT ?? '5310');
+server.listen(port, '127.0.0.1', () => {
+  console.log(`Eğitim: http://127.0.0.1:${port}`);
 });
 ```
 

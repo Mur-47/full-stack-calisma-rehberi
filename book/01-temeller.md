@@ -228,6 +228,8 @@ GitHub'da kod görünmesi, canlı sunucunun o kodu çalıştırdığı anlamına
 Bu bölümün bütün komutlarını yalnız öğrenme için oluşturduğun yeni klasörde çalıştır. `Get-Location` ile hedefi kontrol et. Aşağıdaki yerel e-posta örnektir; gerçek GitHub kimliğinin yerine zorunlu değildir. `--global` kullanmadığımız için ayar yalnız bu depoda tutulur.
 
 ```powershell
+# Yeni bir terminal açtıysan $lab boş olur; yeniden tanımla:
+$lab = Join-Path $env:USERPROFILE 'Documents\FullStackLab'
 Set-Location -LiteralPath $lab
 New-Item -ItemType Directory -Name 'git-practice'
 Set-Location './git-practice'
@@ -295,7 +297,7 @@ Bir kod incelemesinde birleşebilir durumda olmak, doğru olmak değildir. İki 
 
 ## Çatışmayı kendin üret ve çöz
 
-Conflict, Git'in aynı bölgedeki farklı değişiklikleri nasıl birleştireceğine karar verememesidir. İki sürümden birini rastgele seçmek çözüm değildir; hedef davranışı belirlemek gerekir. Şu deney yalnız öğrenme README dosyasında yapılır:
+Conflict, Git'in aynı bölgedeki farklı değişiklikleri nasıl birleştireceğine karar verememesidir. İki sürümden birini rastgele seçmek çözüm değildir; hedef davranışı belirlemek gerekir. Şu deney yalnız öğrenme deposundaki `title.txt` dosyasında yapılır:
 
 ```powershell
 git switch -c feat/short-title

@@ -85,6 +85,8 @@ const server = http.createServer(async (request, response) => {
 
 server.requestTimeout = 10000;
 server.headersTimeout = 10000;
-server.listen(5310, '127.0.0.1', () => {
-  console.log('Eğitim: http://127.0.0.1:5310');
+const port = Number(process.env.PORT ?? '5310');
+if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error('PORT geçersiz.');
+server.listen(port, '127.0.0.1', () => {
+  console.log(`Eğitim: http://127.0.0.1:${port}`);
 });
