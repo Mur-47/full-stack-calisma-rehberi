@@ -1,0 +1,13 @@
+{
+  "name": "full-stack-rehberi-node-ornek",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test domain.test.mjs"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "license": "MIT"
+}
